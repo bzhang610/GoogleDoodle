@@ -20,3 +20,6 @@ def sketchplot(data,row=None):
         plt.plot(x, y, marker='.')
     plt.title(data[row]['word'])
     plt.axis('off')
+    return points, data.labels.iloc[row]
+
+

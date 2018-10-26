@@ -2,5 +2,9 @@
 *.csv
 *.xlsx
 *.png
+*.pdf
 
+.ipynb_checkpoints
+.vscode
+__pycache__
 data/

@@ -49,3 +49,7 @@ class data_loader:
     @property
     def shape(self):
         return self.data.shape
+
+    @property
+    def labels(self):
+        return pd.get_dummies(self.data.word)
