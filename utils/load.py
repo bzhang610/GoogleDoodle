@@ -1,8 +1,10 @@
+import os, sys
+import ast
+
 import numpy as np
 import pandas as pd
-import os, sys
-
 import matplotlib.pyplot as plt
+
 from IPython.display import display, HTML
 
 classes = ["airplane","angel","basket","bear","belt","candle","crown","cat","dog","fish"]
