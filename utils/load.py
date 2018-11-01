@@ -21,9 +21,7 @@ class data_loader:
         #self.access_file = access_file
         frames = []
         for index,file in enumerate(access_files):
-            data = pd.read_csv(file)
-            data.drop(data.loc[data['recognized']==False].index, inplace=True)
-            data.drop(columns=['recognized','timestamp','key_id'],axis=1,inplace=True)
+            data = pd.read_csv(file,usecols=["drawing","word"])
             frames.append(data)
                 
         self.data = pd.concat(frames)
