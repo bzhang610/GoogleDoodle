@@ -1,7 +1,7 @@
 import os, sys
 import ast
 import importlib
-import keras
+#import keras
 
 import pandas as pd
 import numpy as np
@@ -25,7 +25,7 @@ def sketchplot(data,row=None):
     plt.axis('off')
 
 class ImageGenerator():
-    imsize = (450, 450)
+    imsize = (28, 28)
     def __init__(self, access_files, batch_size=16, **kwargs):
         self.loader     = DataLoader(access_files, batch_size=batch_size)
         self.dim        = kwargs.pop('dim', self.imsize)
