@@ -93,7 +93,7 @@ class DataLoader():
 class SeqGenerator(DataLoader):
 
     @staticmethod
-    def convert(strokes,MAXLEN=100):
+    def convert(strokes,MAXLEN=75):
         '''
         Converts input sequence( list of lists) containing cordinate locations of points on canvas to usable format for RNN/LSTM.
         The individual strokes are concatenated with each other with a separate dimension specifically  to mark start of a new stroke
@@ -115,7 +115,11 @@ class SeqGenerator(DataLoader):
         in_strokes = [(xi,yi,i)  for i,(x,y) in enumerate(seq) for xi,yi in zip(x,y)]
         c_strokes = np.stack(in_strokes)
         c_strokes[:,2] = [1]+np.diff(c_strokes[:,2]).tolist()
-        return pad_sequences(c_strokes.swapaxes(0, 1), maxlen=MAXLEN, padding='post').swapaxes(0, 1)
+        c_strokes = c_strokes.astype(np.float64)
+        c_strokes[:,0] = c_strokes[:,0]/np.max(c_strokes[:,0])
+        c_strokes[:,1] = c_strokes[:,1]/np.max(c_strokes[:,1])
+        #Preprocessing to scale values to a range more convinient for operations
+        return pad_sequences(c_strokes.swapaxes(0, 1), maxlen=MAXLEN,dtype='float64', padding='post').swapaxes(0, 1)
 
     def __next__(self):
         '''
@@ -145,8 +149,7 @@ class SeqGenerator(DataLoader):
 class ImgGenerator(DataLoader):
     imsize = (450,450)
 
-    @staticmethod
-    def fig2data (fig):
+    def fig2data (self,fig):
         """
         @brief Convert a Matplotlib figure to a 4D numpy array with RGBA channels and return it
         @param fig a matplotlib figure
@@ -166,8 +169,7 @@ class ImgGenerator(DataLoader):
         buf = np.roll ( buf, 3, axis = 2 )
         return buf
     
-    @staticmethod
-    def fig2img ( fig, size=None ):
+    def fig2img (self,fig, size=None ):
         """
         @brief Convert a Matplotlib figure to a PIL Image in RGBA format and return it
         @param fig a matplotlib figure
@@ -176,7 +178,7 @@ class ImgGenerator(DataLoader):
         http://www.icare.univ-lille1.fr/tutorials/convert_a_matplotlib_figure
         """
         # put the figure pixmap into a numpy array
-        buf     = fig2data ( fig )
+        buf     = self.fig2data ( fig )
         w, h, d = buf.shape
         image   = Image.frombytes( "RGBA", ( w ,h ), buf.tostring( ) )
 
@@ -190,8 +192,7 @@ class ImgGenerator(DataLoader):
         else:
             return image
 
-    @staticmethod
-    def vec2img(strokes):
+    def vec2img(self,strokes):
         '''
         Converts given strokes to 2D image. Uses faculties of matpltlib for plotting purposes
         Args:
@@ -228,6 +229,6 @@ class ImgGenerator(DataLoader):
         dataframe = pd.concat(data)
         dataframe = dataframe.sample(frac=1).reset_index(drop=True)
 
-        dataframe['drawing'] = dataframe['drawing'].apply(self.vector2img)
+        dataframe['drawing'] = dataframe['drawing'].apply(self.vec2img)
         dataframe['word'] = dataframe['word'].apply(lambda x:self.class_encoder[x])
         return np.stack(dataframe['drawing'].values.tolist()),self._onehotencoder(dataframe['word'].values)
