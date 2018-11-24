@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 
 from IPython.display import display, HTML
 
-from keras.preprocessing.sequence import pad_sequences
 
 class DataLoader():
     '''
@@ -93,7 +92,7 @@ class DataLoader():
 class SeqGenerator(DataLoader):
 
     @staticmethod
-    def convert(strokes,MAXLEN=75):
+    def convert(strokes,MAXLEN=100):
         '''
         Converts input sequence( list of lists) containing cordinate locations of points on canvas to usable format for RNN/LSTM.
         The individual strokes are concatenated with each other with a separate dimension specifically  to mark start of a new stroke
@@ -119,7 +118,13 @@ class SeqGenerator(DataLoader):
         c_strokes[:,0] = c_strokes[:,0]/np.max(c_strokes[:,0])
         c_strokes[:,1] = c_strokes[:,1]/np.max(c_strokes[:,1])
         #Preprocessing to scale values to a range more convinient for operations
-        return pad_sequences(c_strokes.swapaxes(0, 1), maxlen=MAXLEN,dtype='float64', padding='post').swapaxes(0, 1)
+        seq_len = c_strokes.shape[0]
+        pad_dim = ((0,MAXLEN-seq_len),(0,0))
+        try:
+            return np.pad(c_strokes,pad_dim,'edge')
+        except:
+            return c_strokes[:MAXLEN]
+        #return pad_sequences(c_strokes.swapaxes(0, 1), maxlen=MAXLEN,dtype='float64', padding='post').swapaxes(0, 1)
 
     def __next__(self):
         '''
