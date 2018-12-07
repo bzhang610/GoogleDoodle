@@ -8,6 +8,11 @@ import matplotlib.pyplot as plt
 from IPython.display import display, HTML
 
 classes = ["airplane","angel","basket","bear","belt","candle","crown","cat"]
+classes_1 = ["airplane","angel","basket","bear","belt","candle","crown","cat"]
+classes_2 = ['bee','crab','drums','elephant','hospital','mouse','onion','tree']
+classes_3 = ['book', 'camel', 'camera', 'carrot', 'matches', 'microwave', 'nose', 'toaster']
+classes_4 = ['apple','cloud', 'dresser', 'drill','mug', 'pool', 'submarine', 'toilet']
+#classes = classes_1 + classes_2 + classes_3 + classes_4
 
 class DataLoader:
     '''

@@ -10,10 +10,10 @@ from .load import DataLoader, classes
 from keras.preprocessing.sequence import pad_sequences
 
 class SeqGenerator():
-    def __init__(self, access_files, batch_size=16,**kwargs):
+    def __init__(self, access_files,seq_len = 100, batch_size=16,**kwargs):
         self.loader     = DataLoader(access_files, batch_size=batch_size)
-        self.dim = kwargs.pop('dim', 100)
-        self.batchSize  = batch_size*8
+        self.dim = kwargs.pop('dim', seq_len)
+        self.batchSize  = batch_size* len(classes)
         self.n_channels = kwargs.pop('n_channels', 3)
         self.n_classes  = len(classes)
 
