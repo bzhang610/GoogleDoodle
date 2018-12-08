@@ -169,8 +169,11 @@ class ImageLoader(DataLoader):
     
     def __iter__(self):
         while(True):
-            data = self._generate_block()
-            data['drawing'] = data['drawing'].apply(self.draw_image)
+            try:
+                data = self._generate_block()
+                data['drawing'] = data['drawing'].apply(self.draw_image)
+            except:
+                break
             for chunk in self.chunker(data,self.batch_size):
                 images = torch.from_numpy(np.stack(chunk['drawing'].values.tolist()))
                 categories = torch.from_numpy(chunk['word'].values)
