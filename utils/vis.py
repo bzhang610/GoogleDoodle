@@ -1,7 +1,7 @@
 import os, sys
 import ast
 import importlib
-#import keras
+import keras
 
 import pandas as pd
 import numpy as np
@@ -25,7 +25,7 @@ def sketchplot(data,row=None):
     plt.axis('off')
 
 class ImageGenerator():
-    imsize = (28, 28)
+    imsize = (64, 64)
     def __init__(self, access_files, batch_size=16, **kwargs):
         self.loader     = DataLoader(access_files, batch_size=batch_size)
         self.dim        = kwargs.pop('dim', self.imsize)
@@ -47,6 +47,9 @@ class ImageGenerator():
                 y[i,] = lbl
 
             yield X, self.onehot(y)
+     
+    def minmax(self, x):
+        return (x - np.max(x))/(np.max(x) - np.min(x))
 
     def onehot(self, y):
         b = np.zeros((y.shape[0], self.n_classes))
