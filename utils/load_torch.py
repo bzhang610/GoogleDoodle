@@ -17,7 +17,6 @@ class DataLoader():
             self:(datatype: DataLoader)pointer to current instance of the class
             classes:(data type: list)list of classes to load data for training under a subset of the data
             root_location:(data type: string) root location of the folder under consideration
-
         Kwargs:
         ------
             read_size:(data type: int)number of instances to read from each file.This value controls the speed of reading the data from the 
@@ -37,7 +36,7 @@ class DataLoader():
         self.iterators = []
         
         for file in access_files:
-            data_generator = pd.read_csv(file,usecols=["drawing","word"],chunksize=read_size)
+            data_generator = pd.read_csv(file,usecols=["drawing","word","recognized"],chunksize=read_size)
             self.iterators.append(data_generator)
     
     def _generate_block(self):
@@ -177,22 +176,5 @@ class ImageLoader(DataLoader):
             for chunk in self.chunker(data,self.batch_size):
                 images = torch.from_numpy(np.stack(chunk['drawing'].values.tolist()))
                 categories = torch.from_numpy(chunk['word'].values)
-                yield images.view(images.shape[0],1,images.shape[1],images.shape[2]),categories
-            
-    
-    
-                
-    
-
-
-        
-
-
-
-
-
-
-        
-
-
-
+                recognized = chunk['recognized'].values
+                yield images.view(images.shape[0],1,images.shape[1],images.shape[2]),categories,recognized
