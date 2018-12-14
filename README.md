@@ -19,3 +19,8 @@ For the vanilla LSTM, input sequences are directly fed into 2 stacked LSTM layer
 For the Convolution LSTM model, it has 3 extra Conv1D layers. The first two each has 48 and 64 channels of size 5x1 filters. The third Conv1D layer has 96 channels of 3x1 filters. The 2 LSTM and 2 dense layers have same structures as in vanilla LSTM. 
 
 
+## Performance
+
+
+#### LSTM
+![alt text](https://raw.githubusercontent.com/icolbert/MLIP285/master/Graphs/Incorrect-LSTM.png)
