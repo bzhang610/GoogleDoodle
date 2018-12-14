@@ -1,8 +1,17 @@
 # MLIP285
-Machine Learning for Image Processing
+## Objective:
+To analyze performance of different approaches to classify sketches. The data can be represented using either images or as a sequence of variable length vectors representing different strokes in the sketch. To understand the complexity of the model and in turn the complexity of the model to approach this task, we use CNNs and LSTMs of varying complexity
+## Architectures
+### CNN architectures
+#### Vanilla CNN
+The first is a vanilla CNN with three convolutional and max pooling layers followed by three fully connected layers. The convolutional layers use 3x3 windows while the maxpooling layers use 2x2 windows. The second is a more complex architecture with a convolutional layer followed by an inception module followed by another convolutional layer and then two fully connected layers.
+3x3 windows are again used for the convolutional layers, and the fully connected layers reduce the number of the units to the corresponding number of classes.
+#### Inception CNN
+An inception module enables multiple convolutions of varying size to run in parallel, allowing for more features to be learned at different scales. This provides the model more flexibility to determine for itself what size convolutional windows are best for extracting features. The multiple feature maps are then concatenated and scaled to the correct size for the final convolutional layer. The inception module in our network uses 1x1, 3x1, 1x3, and 3x3 windows along with different padding techniques to test a variety of configurations. In addition, the inputs to each feature map are normalized using batch normalization in order to control the distribution of the inputs and reduce overfitting. Since this model is more powerful in its ability to extract relevant features, we expect it to perform better at classification than the vanilla CNN.
+### LSTM architectures 
+#### Vanilla LSTM
+For the vanilla LSTM, input sequences are directly fed into 2 stacked LSTM layers with 128 and 512 units respectively. The first LSTM layer is set with true return sequence, which means each input sequence will have correcsponding LSTM outputs. The second LSTM layer's return sequence is set to false, subsequently only one set of LSTM outputs. The LSTM layers are followed by 2 dense layers with 128 units and units with same number as classes from input respectively. 
+#### ConvLSTM
+For the Convolution LSTM model, it has 3 extra Conv1D layers. The first two each has 48 and 64 channels of size 5x1 filters. The third Conv1D layer has 96 channels of 3x1 filters. The 2 LSTM and 2 dense layers have same structures as in vanilla LSTM. 
 
-Notes:
- - Build and test Sketch RNN and CNN (https://github.com/payalbajaj/sketch_rnn_classification, https://github.com/tensorflow/magenta/tree/master/magenta/models/sketch_rnn)
- - Work on data preprocessing
- - Using Keras and TensorFlow
- - Proposal due 10/26 Friday
+
