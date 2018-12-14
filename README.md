@@ -18,6 +18,7 @@ For the vanilla LSTM, input sequences are directly fed into 2 stacked LSTM layer
 #### ConvLSTM
 For the Convolution LSTM model, it has 3 extra Conv1D layers. The first two each has 48 and 64 channels of size 5x1 filters. The third Conv1D layer has 96 channels of 3x1 filters. The 2 LSTM and 2 dense layers have same structures as in vanilla LSTM. 
 
+The LSTM models were run in py3gym-gpu shell with tensorflow 1.4.0 and keras 2.1.5
 
 ## Performance
 
