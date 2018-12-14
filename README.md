@@ -21,7 +21,7 @@ For the Convolution LSTM model, it has 3 extra Conv1D layers. The first two each
 
 ## Performance
 
-Below are the training/validation accuracy and loss curves throughout training ConvLSTM architecture. We also visualize the incorrect classifications for various models.
+Below are the training/validation accuracy and loss curves throughout training ConvLSTM architecture and the final test accuracies for all of the CNN architectures. We also visualize the incorrect classifications for various models.
 
 #### LSTM
 ![alt text](https://raw.githubusercontent.com/icolbert/MLIP285/master/Graphs/lstm-conv-accs.png)
@@ -30,6 +30,6 @@ Below are the training/validation accuracy and loss curves throughout training C
 
 #### CNN
 ![alt text](https://raw.githubusercontent.com/icolbert/MLIP285/master/Graphs/cnn-accs.png)
-![alt text](https://raw.githubusercontent.com/icolbert/MLIP285/master/Graphs/Incorrect-CNN.png)
 ![alt text](https://raw.githubusercontent.com/icolbert/MLIP285/master/Graphs/correct-cnn.png)
+![alt text](https://raw.githubusercontent.com/icolbert/MLIP285/master/Graphs/Incorrect-CNN.png)
 
