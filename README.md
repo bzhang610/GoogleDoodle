@@ -29,6 +29,7 @@ Below are the training/validation accuracy and loss curves throughout training C
 
 
 #### CNN
+![alt text](https://raw.githubusercontent.com/icolbert/MLIP285/master/Graphs/inception-cnn.png)
 ![alt text](https://raw.githubusercontent.com/icolbert/MLIP285/master/Graphs/correct-cnn.png)
 ![alt text](https://raw.githubusercontent.com/icolbert/MLIP285/master/Graphs/Incorrect-CNN.png)
 #### Comparison of performance
