@@ -1,7 +1,11 @@
 # MLIP285
 ## Objective:
 To analyze performance of different approaches to classify sketches. The data can be represented using either images or as a sequence of variable length vectors representing different strokes in the sketch. To understand the complexity of the model and in turn the complexity of the model to approach this task, we use CNNs and LSTMs of varying complexity
-## Architectures
+## Data:
+As an open source project, Google AI released a dataset containing 50M drawings of 340 categories from their game “Quick, Draw!”, in which participants were asked to hand draw images from certain categories~\cite{doodlesite}. This dataset is available in two forms: 1) The ‘raw’ dataset which contains the exact user input, i.e. the exact positions of the participants pen stroke sampled at a certain rate, and 2) the ‘simplified’ dataset which only contains the positions required to reproduce the image. These points correspond to the beginning and end of lines in the drawing, so that all the points in between can be reproduced by simply connecting the end points. This ‘simplified’ dataset is significantly smaller in size and still retains all relevant information.
+
+Data was acquired from the kaggle website for the competition:https://www.kaggle.com/c/quickdraw-doodle-recognition/data
+## Architectures:
 ### CNN architectures
 #### Vanilla CNN
 The first is a vanilla CNN with three convolutional and max pooling layers followed by three fully connected layers. The convolutional layers use 3x3 windows while the maxpooling layers use 2x2 windows. The second is a more complex architecture with a convolutional layer followed by an inception module followed by another convolutional layer and then two fully connected layers.
