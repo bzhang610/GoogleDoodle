@@ -1,4 +1,4 @@
-# MLIP285
+# Hand-drawn Doodle Recognition
 ## Objective:
 To analyze performance of different approaches to classify sketches. The data can be represented using either images or as a sequence of variable length vectors representing different strokes in the sketch. To understand the complexity of the model and in turn the complexity of the model to approach this task, we use CNNs and LSTMs of varying complexity
 ## Data:
